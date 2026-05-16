@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} + ' - Heaven Hotel'">Room - Heaven Hotel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-slate-50">
+    <div th:insert="~{fragments/navbar :: navbar}"></div>
+    <main class="mx-auto max-w-4xl px-4 py-10 sm:px-6">
+        <div class="mb-6"><a th:href="@{/rooms}" class="text-blue-600 hover:underline"><i class="fas fa-arrow-left mr-1"></i> Back to Rooms</a></div>
+        <div class="rounded-2xl bg-white p-8 shadow-sm">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-slate-900" th:text="'Room ' + ${room.roomNumber}">Room</h1>
+                <span class="rounded-full px-3 py-1 text-sm font-medium"
+                      th:classappend="${room.status == 'AVAILABLE'} ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'"
+                      th:text="${room.status}">AVAILABLE</span>
+            </div>
+            <p class="mt-1 text-slate-500" th:text="${room.roomType}">STANDARD</p>
+            <p class="mt-4 text-slate-700" th:text="${room.description}">Description</p>
+            <div class="mt-6 grid gap-4 sm:grid-cols-3">
+                <div class="rounded-xl bg-slate-50 p-4"><p class="text-sm text-slate-500">Price / Night</p><p class="text-xl font-bold text-slate-900" th:text="'$' + ${#numbers.formatDecimal(room.pricePerNight, 1, 2)}">$0</p></div>
+                <div class="rounded-xl bg-slate-50 p-4"><p class="text-sm text-slate-500">Capacity</p><p class="text-xl font-bold text-slate-900" th:text="${room.capacity} + ' guests'">2 guests</p></div>
+                <div class="rounded-xl bg-slate-50 p-4"><p class="text-sm text-slate-500">Amenities</p><p class="text-sm text-slate-700" th:text="${room.amenities}">-</p></div>
+            </div>
+            <div class="mt-6 flex gap-3">
+                <a th:href="@{/bookings}" class="rounded-xl bg-blue-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700">Book Now</a>
+                <a th:href="@{/rooms/{id}/edit(id=${room.roomId})}" class="rounded-xl bg-slate-100 px-5 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200">Edit Room</a>
+            </div>
+        </div>
+    </main>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

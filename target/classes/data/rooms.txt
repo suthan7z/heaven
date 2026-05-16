@@ -1,0 +1,5 @@
+RM101|101|STANDARD|2|120.0|AVAILABLE|Comfortable standard room with garden view|true|true|true|false|false|2026-05-16T19:32:34.9219483|||STANDARD|true
+RM102|102|STANDARD|2|120.0|AVAILABLE|Standard room with pool view|true|true|true|false|true|2026-05-16T19:32:34.9219483|||STANDARD|true
+RM201|201|STANDARD|2|150.0|AVAILABLE|Deluxe standard room|true|true|true|false|true|2026-05-16T19:32:34.9219483|||STANDARD|true
+RM301|301|SUITE|4|350.0|AVAILABLE|Luxury suite with ocean view|true|true|true|true|true|2026-05-16T19:32:34.9219483|||SUITE|2|2|true|true|1.5
+RM302|302|SUITE|4|400.0|AVAILABLE|Presidential suite|true|true|true|true|true|2026-05-16T19:32:34.9219483|||SUITE|3|3|true|true|1.8

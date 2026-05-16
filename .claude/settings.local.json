@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\Mr.Cherry\\\\Downloads\\\\Heaven\" -Force | Select-Object Name, @{Name=\"Type\";Expression={if\\($_.PSIsContainer\\){\"DIR\"}else{\"FILE\"}}} | Format-Table -AutoSize)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\Mr.Cherry\\\\Downloads\\\\Heaven\\\\src\\\\main\\\\resources\" -Recurse -Directory | ForEach-Object {$_.FullName.Replace\\(\"c:\\\\Users\\\\Mr.Cherry\\\\Downloads\\\\Heaven\\\\src\\\\main\\\\resources\\\\\", \"\"\\)} | Sort-Object)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\Mr.Cherry\\\\Downloads\\\\Heaven\\\\.github\" -Recurse | ForEach-Object {$_.FullName.Replace\\(\"c:\\\\Users\\\\Mr.Cherry\\\\Downloads\\\\Heaven\\\\\", \"\"\\)} | Sort-Object)",
+      "Bash(mvnw.cmd compile *)",
+      "PowerShell(Get-Command java -ErrorAction SilentlyContinue)",
+      "PowerShell($env:JAVA_HOME)",
+      "Bash(java -version)",
+      "Bash(bash mvnw compile)",
+      "Bash(ls /c/Users/Mr.Cherry/.m2/wrapper/dists/ 2>/dev/null || echo \"no m2 wrapper\")",
+      "Read(//c/Users/Mr.Cherry/.m2/wrapper/**)",
+      "Bash(\"/c/Users/Mr.Cherry/AppData/Local/Temp/chocolatey/ChocolateyScratch/maven/3.9.15/apache-maven-3.9.15/bin/mvn\" compile *)",
+      "Bash(MAVEN_OPTS=\"-Xmx256m -Xms128m\" \"/c/Users/Mr.Cherry/AppData/Local/Temp/chocolatey/ChocolateyScratch/maven/3.9.15/apache-maven-3.9.15/bin/mvn\" compile)"
+    ]
+  }
+}

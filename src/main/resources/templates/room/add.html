@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Room - Heaven Hotel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-slate-50">
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+
+<main class="mx-auto max-w-4xl px-4 py-8 sm:px-6">
+
+    <div class="mb-6 flex items-center gap-3">
+        <a th:href="@{/rooms}" class="rounded-xl bg-white border border-slate-200 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50">
+            <i class="fas fa-arrow-left mr-1"></i> Back
+        </a>
+        <div>
+            <h1 class="text-2xl font-bold text-slate-900"><i class="fas fa-plus-circle text-blue-600 mr-2"></i>Add New Room</h1>
+            <p class="text-sm text-slate-500">Create a new room in the hotel inventory</p>
+        </div>
+    </div>
+
+    <div th:if="${errorMessage}" class="mb-4 rounded-xl bg-red-50 border border-red-200 p-3 text-sm text-red-700">
+        <i class="fas fa-exclamation-circle mr-1"></i><span th:text="${errorMessage}"></span>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-3">
+
+        <!-- Form -->
+        <div class="lg:col-span-2">
+            <div class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
+                <form method="post" th:action="@{/rooms/add}" id="addRoomForm" class="space-y-5">
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block mb-1 text-sm font-medium text-slate-700">Room Number <span class="text-red-500">*</span></label>
+                            <input type="number" name="roomNumber" min="1" max="9999" required
+                                   class="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-sm font-medium text-slate-700">Room Type <span class="text-red-500">*</span></label>
+                            <select name="roomType" required
+                                    class="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                                <option value="">-- Select --</option>
+                                <option value="STANDARD">Standard Room</option>
+                                <option value="SUITE">Suite Room</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block mb-1 text-sm font-medium text-slate-700">Price per Night ($) <span class="text-red-500">*</span></label>
+                        <input type="number" name="pricePerNight" step="0.01" min="0.01" placeholder="e.g. 120.00" required
+                               class="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block mb-1 text-sm font-medium text-slate-700">Description</label>
+                        <textarea name="description" rows="3" placeholder="Brief description of the room..."
+                                  class="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none resize-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-slate-700">Amenities</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="flex items-center gap-2 rounded-xl border border-slate-200 p-3 cursor-pointer hover:bg-slate-50">
+                                <input type="checkbox" name="hasAC" class="rounded text-blue-600">
+                                <i class="fas fa-snowflake text-blue-400"></i>
+                                <span class="text-sm text-slate-700">Air Conditioning</span>
+                            </label>
+                            <label class="flex items-center gap-2 rounded-xl border border-slate-200 p-3 cursor-pointer hover:bg-slate-50">
+                                <input type="checkbox" name="hasWifi" class="rounded text-blue-600">
+                                <i class="fas fa-wifi text-green-400"></i>
+                                <span class="text-sm text-slate-700">WiFi</span>
+                            </label>
+                            <label class="flex items-center gap-2 rounded-xl border border-slate-200 p-3 cursor-pointer hover:bg-slate-50">
+                                <input type="checkbox" name="hasTV" class="rounded text-blue-600">
+                                <i class="fas fa-tv text-purple-400"></i>
+                                <span class="text-sm text-slate-700">Television</span>
+                            </label>
+                            <label class="flex items-center gap-2 rounded-xl border border-slate-200 p-3 cursor-pointer hover:bg-slate-50">
+                                <input type="checkbox" name="hasKitchen" class="rounded text-blue-600">
+                                <i class="fas fa-utensils text-amber-400"></i>
+                                <span class="text-sm text-slate-700">Kitchen</span>
+                            </label>
+                            <label class="flex items-center gap-2 rounded-xl border border-slate-200 p-3 cursor-pointer hover:bg-slate-50 col-span-2">
+                                <input type="checkbox" name="hasBalcony" class="rounded text-blue-600">
+                                <i class="fas fa-tree text-emerald-400"></i>
+                                <span class="text-sm text-slate-700">Balcony</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 pt-2">
+                        <button type="submit"
+                                class="rounded-xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition">
+                            <i class="fas fa-check mr-1"></i> Add Room
+                        </button>
+                        <a th:href="@{/rooms}"
+                           class="rounded-xl border border-slate-300 px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 transition">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Info panel -->
+        <div class="space-y-4">
+            <div class="rounded-2xl bg-blue-50 border border-blue-100 p-5">
+                <h3 class="font-semibold text-blue-900"><i class="fas fa-bed mr-1"></i> Standard Room</h3>
+                <p class="mt-2 text-sm text-blue-700">Basic room for up to 2 guests. Ideal for solo travelers and couples.</p>
+                <p class="mt-2 text-xs text-blue-500">Base price multiplier: 1.0×</p>
+            </div>
+            <div class="rounded-2xl bg-amber-50 border border-amber-100 p-5">
+                <h3 class="font-semibold text-amber-900"><i class="fas fa-crown mr-1"></i> Suite Room</h3>
+                <p class="mt-2 text-sm text-amber-700">Premium suite for up to 4 guests with separate lounge and Jacuzzi.</p>
+                <p class="mt-2 text-xs text-amber-500">Base price multiplier: 1.5×</p>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

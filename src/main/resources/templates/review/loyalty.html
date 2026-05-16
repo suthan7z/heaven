@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Loyalty Program - Heaven Hotel</title><script src="https://cdn.tailwindcss.com"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></head>
+<body class="min-h-screen bg-slate-50">
+    <div th:insert="~{fragments/navbar :: navbar}"></div>
+    <main class="mx-auto max-w-2xl px-4 py-10 sm:px-6">
+        <h1 class="text-2xl font-bold text-slate-900">Loyalty Program</h1>
+        <div th:if="${loyalty != null}" class="mt-6 rounded-2xl bg-white p-8 shadow-sm text-center">
+            <div class="text-5xl font-bold text-amber-500" th:text="${loyalty.totalPoints}">0</div>
+            <p class="mt-2 text-slate-500">Points</p>
+            <span class="mt-4 inline-block rounded-full bg-amber-100 px-4 py-2 font-semibold text-amber-700" th:text="${loyalty.tier}">BRONZE</span>
+        </div>
+        <div th:if="${loyalty == null}" class="mt-6 rounded-2xl bg-white p-8 shadow-sm text-center text-slate-500">
+            <i class="fas fa-star text-5xl text-slate-300"></i>
+            <p class="mt-4">You are not enrolled in the loyalty program yet.</p>
+        </div>
+    </main>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

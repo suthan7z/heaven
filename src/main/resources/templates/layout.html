@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} + ' - Heaven Hotel'">Heaven Hotel</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3c72',
+                        secondary: '#2a5298',
+                        accent: '#f39c12',
+                        muted: '#95a5a6',
+                        surface: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+
+    <!-- Page-specific CSS -->
+    <th:block th:if="${pageCss != null}">
+        <link rel="stylesheet" th:href="@{${pageCss}}">
+    </th:block>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900">
+    <div class="flex min-h-screen flex-col">
+        <!-- Navigation Bar -->
+        <div th:replace="fragments/navbar :: navbar"></div>
+
+        <!-- Main Content -->
+        <div class="flex flex-1 flex-col md:flex-row">
+            <!-- Sidebar -->
+            <div sec:authorize="isAuthenticated()" class="hidden md:block">
+                <div th:replace="fragments/sidebar :: sidebar"></div>
+            </div>
+
+            <!-- Page Content -->
+            <main class="flex-1 px-4 py-6 md:px-8">
+                <!-- Alert Messages -->
+                <div th:if="${successMessage}" class="alert alert-success alert-dismissible" role="alert">
+                    <i class="fas fa-check-circle"></i>
+                    <span th:text="${successMessage}"></span>
+                    <button type="button" class="btn-close ml-4" data-bs-dismiss="alert" aria-label="Close">×</button>
+                </div>
+
+                <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible" role="alert">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span th:text="${errorMessage}"></span>
+                    <button type="button" class="btn-close ml-4" data-bs-dismiss="alert" aria-label="Close">×</button>
+                </div>
+
+                <div th:if="${warningMessage}" class="alert alert-warning alert-dismissible" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span th:text="${warningMessage}"></span>
+                    <button type="button" class="btn-close ml-4" data-bs-dismiss="alert" aria-label="Close">×</button>
+                </div>
+
+                <div th:if="${infoMessage}" class="alert alert-info alert-dismissible" role="alert">
+                    <i class="fas fa-info-circle"></i>
+                    <span th:text="${infoMessage}"></span>
+                    <button type="button" class="btn-close ml-4" data-bs-dismiss="alert" aria-label="Close">×</button>
+                </div>
+
+                <!-- Page-specific Content -->
+                <th:block th:include="${view}"></th:block>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+
+    <!-- Custom JS -->
+    <script th:src="@{/static/js/app.js}"></script>
+
+    <!-- Page-specific JS -->
+    <th:block th:if="${pageJs != null}">
+        <script th:src="@{${pageJs}}"></script>
+    </th:block>
+</body>
+</html>

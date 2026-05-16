@@ -1,0 +1,136 @@
+<!-- Sidebar Fragment -->
+<aside th:fragment="sidebar" class="sidebar w-full max-w-[280px] border-r border-slate-200 bg-white p-6 shadow-sm">
+    <div class="mb-6">
+        <h5 class="text-lg font-semibold text-slate-900">
+            <i class="fas fa-bars mr-2"></i> Menu
+        </h5>
+    </div>
+
+    <!-- Guest Menu -->
+    <ul class="space-y-2" th:if="${#authorization.expression('hasRole(\"GUEST\")')}">
+        <li>
+            <a href="/dashboard" th:classappend="${activePage == 'dashboard' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/bookings/new}"
+               th:classappend="${activePage == 'new-booking' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-plus mr-3"></i> New Booking
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/bookings/my-bookings}"
+               th:classappend="${activePage == 'my-bookings' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-calendar-alt mr-3"></i> My Bookings
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/reviews}"
+               th:classappend="${activePage == 'reviews' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-star mr-3"></i> Reviews
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/profile}"
+               th:classappend="${activePage == 'profile' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-user mr-3"></i> Profile
+            </a>
+        </li>
+    </ul>
+
+    <!-- Staff Menu -->
+    <ul class="space-y-2" th:if="${#authorization.expression('hasRole(\"STAFF\")')}">
+        <li>
+            <a href="/dashboard" th:classappend="${activePage == 'dashboard' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/reception/checkin}"
+               th:classappend="${activePage == 'checkin' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-sign-in-alt mr-3"></i> Check-In
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/reception/checkout}"
+               th:classappend="${activePage == 'checkout' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-sign-out-alt mr-3"></i> Check-Out
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/rooms}"
+               th:classappend="${activePage == 'rooms' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-bed mr-3"></i> Room Management
+            </a>
+        </li>
+        <li>
+            <a href="/maintenance" th:classappend="${activePage == 'maintenance' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-tools mr-3"></i> Maintenance
+            </a>
+        </li>
+    </ul>
+
+    <!-- Admin Menu -->
+    <ul class="space-y-2" th:if="${#authorization.expression('hasRole(\"ADMIN\")')}">
+        <li>
+            <a th:href="@{/admin/dashboard}"
+               th:classappend="${activePage == 'admin-dashboard' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-chart-line mr-3"></i> Dashboard
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/admin/users}"
+               th:classappend="${activePage == 'user-management' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-users mr-3"></i> Users
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/admin/rooms}"
+               th:classappend="${activePage == 'room-admin' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-bed mr-3"></i> Rooms
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/admin/bookings}"
+               th:classappend="${activePage == 'booking-admin' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-calendar-check mr-3"></i> Bookings
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/admin/reports}"
+               th:classappend="${activePage == 'reports' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-file-alt mr-3"></i> Reports
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/admin/config}"
+               th:classappend="${activePage == 'config' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-cog mr-3"></i> Settings
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/admin/logs}"
+               th:classappend="${activePage == 'logs' ? ' bg-primary text-white' : ' text-slate-700 hover:bg-slate-100'}"
+               class="flex items-center rounded-xl px-4 py-3 text-sm font-medium transition">
+                <i class="fas fa-history mr-3"></i> Activity Logs
+            </a>
+        </li>
+    </ul>
+</aside>

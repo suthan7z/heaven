@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Staff - Heaven Hotel</title><script src="https://cdn.tailwindcss.com"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"></head>
+<body class="min-h-screen bg-slate-50">
+    <div th:insert="~{fragments/navbar :: navbar}"></div>
+    <main class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+        <h1 class="text-2xl font-bold text-slate-900">Staff</h1>
+        <div th:if="${staff != null and !#lists.isEmpty(staff)}" class="mt-6 overflow-hidden rounded-2xl bg-white shadow-sm">
+            <table class="w-full text-sm">
+                <thead class="bg-slate-50 text-left text-xs font-semibold uppercase text-slate-500">
+                    <tr><th class="px-6 py-4">Name</th><th class="px-6 py-4">Department</th><th class="px-6 py-4">Position</th><th class="px-6 py-4">Status</th></tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr th:each="s : ${staff}" class="hover:bg-slate-50">
+                        <td class="px-6 py-4" th:text="${s.firstName + ' ' + s.lastName}">-</td>
+                        <td class="px-6 py-4" th:text="${s.department}">-</td>
+                        <td class="px-6 py-4" th:text="${s.position}">-</td>
+                        <td class="px-6 py-4"><span class="rounded-full bg-green-100 px-2 py-1 text-xs text-green-700" th:text="${s.status}">ACTIVE</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${staff == null or #lists.isEmpty(staff)}" class="mt-10 text-center text-slate-500"><p>No staff found.</p></div>
+    </main>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>
