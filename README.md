@@ -365,6 +365,8 @@ Then:
 
 
 "C:\Users\Mr.Cherry\AppData\Local\Temp\chocolatey\ChocolateyScratch\maven\3.9.15\apache-maven-3.9.15\bin\mvn.cmd" spring-boot:run -Dspring-boot.run.jvmArguments="-Xmx256m"
+
+
 Wait until you see Started HotelReservationApplication, then open http://localhost:8080/heaven
 
 Option B — VS Code Spring Boot Dashboard

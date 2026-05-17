@@ -73,7 +73,7 @@ public class RoomRepositoryImpl implements RoomRepository {
     @Override
     public Optional<Room> findByNumber(int roomNumber) {
         return findAll().stream()
-            .filter(r -> r.getRoomNumber() == roomNumber)
+            .filter(r -> String.valueOf(roomNumber).equals(r.getRoomNumber()))
             .findFirst();
     }
     

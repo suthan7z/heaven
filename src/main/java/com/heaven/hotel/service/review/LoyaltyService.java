@@ -14,7 +14,7 @@ public class LoyaltyService {
 
     public LoyaltyProgram enroll(String guestId) {
         if (findByGuestId(guestId).isPresent()) return findByGuestId(guestId).get();
-        LoyaltyProgram lp = new LoyaltyProgram(IdGenerator.generateUUID(), guestId);
+        LoyaltyProgram lp = new LoyaltyProgram(guestId, 0, "Bronze");
         programs.add(lp);
         return lp;
     }

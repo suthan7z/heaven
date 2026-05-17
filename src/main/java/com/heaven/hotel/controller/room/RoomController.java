@@ -199,7 +199,7 @@ public class RoomController {
     public String deleteRoom(@PathVariable String roomId, RedirectAttributes redirectAttributes) {
         try {
             Room room = roomService.getRoomById(roomId);
-            int roomNumber = room.getRoomNumber();
+            String roomNumber = room.getRoomNumber();
             roomService.deleteRoom(roomId);
             redirectAttributes.addFlashAttribute("successMessage", 
                 "Room " + roomNumber + " deleted successfully!");

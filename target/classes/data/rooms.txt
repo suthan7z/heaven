@@ -1,9 +1,9 @@
-RM101|101|STANDARD|1|5500.0|AVAILABLE|Cosy single room perfect for solo travellers — steps from Colombo city centre|true|true|false|false|false|2026-05-17T07:05:30.8447668|||STANDARD|false
-RM102|102|STANDARD|2|7000.0|AVAILABLE|Budget twin room with breezy courtyard view — ideal for backpackers|true|true|true|false|false|2026-05-17T07:05:30.8447668|||STANDARD|true
-RM201|201|STANDARD|2|10000.0|AVAILABLE|Comfortable Colombo city-view room with warm Ceylon decor|true|true|true|false|false|2026-05-17T07:05:30.8447668|||STANDARD|true
-RM202|202|STANDARD|2|14500.0|AVAILABLE|Deluxe garden-view room overlooking tropical palms and hotel pool|true|true|true|false|true|2026-05-17T07:05:30.8447668|||STANDARD|true
-RM203|203|STANDARD|3|18000.0|AVAILABLE|Spacious family room with extra bed — near Galle Face Green|true|true|true|false|false|2026-05-17T07:05:30.8447668|||STANDARD|true
-RM301|301|SUITE|4|28000.0|AVAILABLE|Junior suite with separate lounge and sweeping Indian Ocean view|true|true|true|true|true|2026-05-17T07:05:30.8447668|||SUITE|2|2|false|true|1.5
-RM302|302|SUITE|4|40000.0|AVAILABLE|Luxury suite with private Jacuzzi and panoramic Colombo skyline view|true|true|true|true|true|2026-05-17T07:05:30.8447668|||SUITE|2|2|true|true|1.5
-RM401|401|SUITE|6|65000.0|AVAILABLE|Presidential suite — 3 bedrooms, private pool deck overlooking the ocean|true|true|true|true|true|2026-05-17T07:05:30.8447668|||SUITE|3|3|true|true|1.8
-RM402|402|SUITE|6|95000.0|AVAILABLE|Royal Ceylon Penthouse — rooftop terrace, butler service and heritage decor|true|true|true|true|true|2026-05-17T07:05:30.8447668|||SUITE|3|3|true|true|2.0
+RM101|101|STANDARD|1|5500.0|AVAILABLE|Cosy single room perfect for solo travellers — steps from Colombo city centre|true|true|false|false|false|2026-05-17T07:36:37.3115825|||STANDARD|false
+RM102|102|STANDARD|2|7000.0|AVAILABLE|Budget twin room with breezy courtyard view — ideal for backpackers|true|true|true|false|false|2026-05-17T07:36:37.3115825|||STANDARD|true
+RM201|201|STANDARD|2|10000.0|AVAILABLE|Comfortable Colombo city-view room with warm Ceylon decor|true|true|true|false|false|2026-05-17T07:36:37.3115825|||STANDARD|true
+RM202|202|STANDARD|2|14500.0|AVAILABLE|Deluxe garden-view room overlooking tropical palms and hotel pool|true|true|true|false|true|2026-05-17T07:36:37.3115825|||STANDARD|true
+RM203|203|STANDARD|3|18000.0|AVAILABLE|Spacious family room with extra bed — near Galle Face Green|true|true|true|false|false|2026-05-17T07:36:37.3115825|||STANDARD|true
+RM301|301|SUITE|4|28000.0|AVAILABLE|Junior suite with separate lounge and sweeping Indian Ocean view|true|true|true|true|true|2026-05-17T07:36:37.3115825|||SUITE|2|2|false|true|1.5
+RM302|302|SUITE|4|40000.0|AVAILABLE|Luxury suite with private Jacuzzi and panoramic Colombo skyline view|true|true|true|true|true|2026-05-17T07:36:37.3115825|||SUITE|2|2|true|true|1.5
+RM401|401|SUITE|6|65000.0|AVAILABLE|Presidential suite — 3 bedrooms, private pool deck overlooking the ocean|true|true|true|true|true|2026-05-17T07:36:37.3115825|||SUITE|3|3|true|true|1.8
+RM402|402|SUITE|6|95000.0|AVAILABLE|Royal Ceylon Penthouse — rooftop terrace, butler service and heritage decor|true|true|true|true|true|2026-05-17T07:36:37.3115825|||SUITE|3|3|true|true|2.0

@@ -15,7 +15,8 @@ public class ReviewService {
     public Review createReview(String bookingId, String guestId, String roomId,
                                int rating, String title, String comment) {
         Review review = new Review(IdGenerator.generateReviewId(), bookingId, guestId,
-                roomId, rating, title, comment);
+                roomId, rating, comment,
+                java.time.LocalDate.now().toString(), "Pending");
         reviews.add(review);
         return review;
     }
