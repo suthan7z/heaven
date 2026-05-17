@@ -1,7 +1,6 @@
 package com.heaven.hotel.service.review;
 
 import com.heaven.hotel.model.review.LoyaltyProgram;
-import com.heaven.hotel.utils.IdGenerator;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;

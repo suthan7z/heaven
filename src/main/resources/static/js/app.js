@@ -6,6 +6,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     setupGlobalHandlers();
     initializeFormValidation();
+    initScrollAnimations();
+    initParallax();
+    initCounters();
 });
 
 /**
@@ -175,6 +178,79 @@ function toggleMobileMenu() {
     if (menu) {
         menu.classList.toggle('hidden');
     }
+}
+
+/**
+ * Scroll-triggered reveal animations (Framer Motion-style)
+ */
+function initScrollAnimations() {
+    const els = document.querySelectorAll('[data-animate]');
+    if (!els.length) return;
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    els.forEach(function(el) { observer.observe(el); });
+
+    /* Auto-stagger direct children of [data-stagger] grids */
+    document.querySelectorAll('[data-stagger]').forEach(function(grid) {
+        Array.from(grid.children).forEach(function(child, i) {
+            child.setAttribute('data-animate', 'fade-up');
+            child.setAttribute('data-delay', String(Math.min(i * 100, 500)));
+            observer.observe(child);
+        });
+    });
+}
+
+/**
+ * Cinematic parallax on elements with data-parallax
+ */
+function initParallax() {
+    const hero = document.querySelector('[data-parallax]');
+    if (!hero) return;
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const speed = parseFloat(hero.dataset.parallax) || 0.35;
+        hero.style.transform = 'translateY(' + (scrolled * speed) + 'px)';
+    }, { passive: true });
+}
+
+/**
+ * Animated number counter for elements with data-count-to
+ */
+function initCounters() {
+    const counters = document.querySelectorAll('[data-count-to]');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = parseFloat(el.dataset.countTo);
+            const suffix = el.dataset.countSuffix || '';
+            const duration = 1400;
+            const start = performance.now();
+
+            function update(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const value = Math.round(eased * target);
+                el.textContent = value + suffix;
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+            observer.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(function(el) { observer.observe(el); });
 }
 
 /**

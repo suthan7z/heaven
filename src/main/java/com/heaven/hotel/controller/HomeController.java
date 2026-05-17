@@ -3,6 +3,7 @@ package com.heaven.hotel.controller;
 import com.heaven.hotel.service.room.RoomService;
 import com.heaven.hotel.service.booking.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model, Authentication auth) {
-        if (auth != null && auth.isAuthenticated()) {
+        if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
             if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
                 return "redirect:/admin/dashboard";
             }

@@ -1,7 +1,6 @@
 package com.heaven.hotel.model.admin;
 
 import com.heaven.hotel.model.user.AdminUser;
-import com.heaven.hotel.model.user.User;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,7 +8,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * AdminManager — manages admin accounts and logs activity.

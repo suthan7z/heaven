@@ -68,7 +68,6 @@ public class FileManager {
      * Write lines to file (overwrite)
      */
     public static void writeLines(String filePath, List<String> lines) throws IOException {
-        File file = new File(filePath);
         getOrCreateFile(filePath);
         Files.write(Paths.get(filePath), lines);
     }
@@ -77,7 +76,6 @@ public class FileManager {
      * Append line to file
      */
     public static void appendLine(String filePath, String line) throws IOException {
-        File file = new File(filePath);
         getOrCreateFile(filePath);
         Files.write(
             Paths.get(filePath),
@@ -90,7 +88,6 @@ public class FileManager {
      * Append multiple lines to file
      */
     public static void appendLines(String filePath, List<String> lines) throws IOException {
-        File file = new File(filePath);
         getOrCreateFile(filePath);
         StringBuilder sb = new StringBuilder();
         for (String line : lines) {

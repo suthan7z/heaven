@@ -1,0 +1,16 @@
+{
+  "properties": [
+    {
+      "name": "app.data.path",
+      "type": "java.lang.String",
+      "description": "Path to the application data directory containing text files.",
+      "defaultValue": "src/main/resources/data/"
+    },
+    {
+      "name": "app.file.encoding",
+      "type": "java.lang.String",
+      "description": "Character encoding used when reading and writing data files.",
+      "defaultValue": "UTF-8"
+    }
+  ]
+}

@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Heaven Hotel</title>
+</head>
 <body>
 <nav th:fragment="navbar" class="bg-slate-900 text-slate-100 shadow-sm">
     <div class="mx-auto flex max-w-screen-2xl flex-col px-4 py-3 sm:px-6 lg:px-8">
@@ -12,7 +17,7 @@
             </a>
 
             <!-- Mobile toggle -->
-            <button type="button" onclick="toggleMobileMenu()"
+            <button type="button" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu"
                     class="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100 transition hover:bg-slate-700 md:hidden">
                 <i class="fas fa-bars"></i>
             </button>

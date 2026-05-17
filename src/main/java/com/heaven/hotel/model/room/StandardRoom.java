@@ -1,6 +1,5 @@
 package com.heaven.hotel.model.room;
 
-import java.util.Arrays;
 
 /**
  * Standard room – basic accommodation with essential amenities.

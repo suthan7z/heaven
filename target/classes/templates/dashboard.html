@@ -6,12 +6,13 @@
     <title>Dashboard - Heaven Hotel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/heaven/static/css/style.css">
 </head>
 <body class="min-h-screen bg-slate-50">
     <div th:insert="~{fragments/navbar :: navbar}"></div>
 
     <main class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-        <div class="mb-8">
+        <div class="mb-8" data-animate="fade-up">
             <h1 class="text-2xl font-bold text-slate-900">Dashboard</h1>
             <p class="mt-1 text-slate-500">Welcome back! Here's what's happening today.</p>
         </div>
@@ -26,40 +27,49 @@
 
         <!-- Stats Cards -->
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
+            <div data-animate="scale-in" data-delay="100" class="cinema-card rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div class="flex items-center gap-4">
                     <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
                         <i class="fas fa-bed text-xl"></i>
                     </div>
                     <div>
                         <p class="text-sm text-slate-500">Total Rooms</p>
-                        <p class="text-2xl font-bold text-slate-900" th:text="${stats['totalRooms'] ?: 0}">0</p>
+                        <p class="text-2xl font-bold text-slate-900 stat-num" th:text="${stats['totalRooms'] ?: 0}">0</p>
                     </div>
                 </div>
+                <div class="mt-3">
+                    <span class="badge badge-info-grad text-xs px-2 py-0.5">All Rooms</span>
+                </div>
             </div>
-            <div class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
+            <div data-animate="scale-in" data-delay="200" class="cinema-card rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div class="flex items-center gap-4">
                     <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-100 text-green-600">
                         <i class="fas fa-check-circle text-xl"></i>
                     </div>
                     <div>
                         <p class="text-sm text-slate-500">Available</p>
-                        <p class="text-2xl font-bold text-slate-900" th:text="${stats['availableRooms'] ?: 0}">0</p>
+                        <p class="text-2xl font-bold text-slate-900 stat-num" th:text="${stats['availableRooms'] ?: 0}">0</p>
                     </div>
                 </div>
+                <div class="mt-3">
+                    <span class="badge badge-dot badge-dot-available badge-success-grad text-xs px-2 py-0.5">Live</span>
+                </div>
             </div>
-            <div class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
+            <div data-animate="scale-in" data-delay="300" class="cinema-card rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div class="flex items-center gap-4">
                     <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
                         <i class="fas fa-calendar-check text-xl"></i>
                     </div>
                     <div>
                         <p class="text-sm text-slate-500">Total Bookings</p>
-                        <p class="text-2xl font-bold text-slate-900" th:text="${stats['totalBookings'] ?: 0}">0</p>
+                        <p class="text-2xl font-bold text-slate-900 stat-num" th:text="${stats['totalBookings'] ?: 0}">0</p>
                     </div>
                 </div>
+                <div class="mt-3">
+                    <span class="badge badge-warning-grad text-xs px-2 py-0.5">Reservations</span>
+                </div>
             </div>
-            <div class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
+            <div data-animate="scale-in" data-delay="400" class="cinema-card rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div class="flex items-center gap-4">
                     <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 text-purple-600">
                         <i class="fas fa-chart-bar text-xl"></i>
@@ -69,12 +79,15 @@
                         <p class="text-2xl font-bold text-slate-900" th:text="${stats['occupancyRate'] ?: '0.0%'}">0%</p>
                     </div>
                 </div>
+                <div class="mt-3">
+                    <span class="badge badge-primary-grad text-xs px-2 py-0.5">Rate</span>
+                </div>
             </div>
         </div>
 
         <!-- Quick Actions -->
         <div class="mt-10 grid gap-6 sm:grid-cols-3">
-            <a th:href="@{/rooms}" class="group flex items-center gap-4 rounded-2xl bg-white p-6 shadow-sm border border-slate-100 transition hover:border-blue-200 hover:shadow-md">
+            <a th:href="@{/rooms}" data-animate="fade-up" data-delay="100" class="cinema-card group flex items-center gap-4 rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition">
                     <i class="fas fa-bed text-xl"></i>
                 </div>
@@ -83,7 +96,7 @@
                     <p class="text-sm text-slate-500">Browse all rooms</p>
                 </div>
             </a>
-            <a th:href="@{/bookings}" class="group flex items-center gap-4 rounded-2xl bg-white p-6 shadow-sm border border-slate-100 transition hover:border-green-200 hover:shadow-md">
+            <a th:href="@{/bookings}" data-animate="fade-up" data-delay="200" class="cinema-card group flex items-center gap-4 rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-100 text-green-600 group-hover:bg-green-600 group-hover:text-white transition">
                     <i class="fas fa-calendar-plus text-xl"></i>
                 </div>
@@ -92,7 +105,7 @@
                     <p class="text-sm text-slate-500">Make a reservation</p>
                 </div>
             </a>
-            <a th:href="@{/profile}" class="group flex items-center gap-4 rounded-2xl bg-white p-6 shadow-sm border border-slate-100 transition hover:border-purple-200 hover:shadow-md">
+            <a th:href="@{/profile}" data-animate="fade-up" data-delay="300" class="cinema-card group flex items-center gap-4 rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition">
                     <i class="fas fa-user text-xl"></i>
                 </div>
@@ -104,18 +117,18 @@
         </div>
 
         <!-- Available Rooms -->
-        <div class="mt-10">
+        <div class="mt-10" data-animate="fade-up">
             <h2 class="mb-4 text-lg font-semibold text-slate-900">Available Rooms</h2>
-            <div th:if="${availableRooms != null and !#lists.isEmpty(availableRooms)}" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div th:if="${availableRooms != null and !#lists.isEmpty(availableRooms)}" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
                 <div th:each="room : ${availableRooms}"
-                     class="rounded-2xl bg-white p-5 shadow-sm border border-slate-100">
+                     class="cinema-card rounded-2xl bg-white p-5 shadow-sm border border-slate-100">
                     <div class="flex items-center justify-between">
                         <span class="font-semibold text-slate-900" th:text="'Room ' + ${room.roomNumber}">Room 101</span>
-                        <span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">Available</span>
+                        <span class="badge badge-dot badge-dot-available badge-success-grad text-xs px-2 py-1">Available</span>
                     </div>
                     <p class="mt-1 text-sm text-slate-500" th:text="${room.roomType}">STANDARD</p>
-                    <p class="mt-2 text-lg font-bold text-slate-900" th:text="'$' + ${#numbers.formatDecimal(room.pricePerNight, 1, 2)} + '/night'">$100/night</p>
-                    <a th:href="@{/bookings}" class="mt-3 block rounded-xl bg-blue-600 py-2 text-center text-sm font-medium text-white transition hover:bg-blue-700">Book Now</a>
+                    <p class="mt-2 text-lg font-bold text-slate-900" th:text="'Rs. ' + ${#numbers.formatDecimal(room.pricePerNight, 1, 2)} + '/night'">Rs. 100/night</p>
+                    <a th:href="@{/bookings}" class="mt-3 block rounded-xl bg-blue-600 py-2 text-center text-sm font-medium text-white transition hover:bg-blue-700 hover:shadow-md">Book Now</a>
                 </div>
             </div>
             <div th:if="${availableRooms == null or #lists.isEmpty(availableRooms)}"
@@ -128,5 +141,6 @@
     </main>
 
     <div th:insert="~{fragments/footer :: footer}"></div>
+    <script src="/heaven/static/js/app.js"></script>
 </body>
 </html>
