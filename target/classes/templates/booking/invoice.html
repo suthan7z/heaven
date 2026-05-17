@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'Invoice — ' + ${booking.bookingId} + ' | Heaven Hotel'">Invoice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+            .print-page { box-shadow: none !important; border: none !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-100">
+
+<!-- Action bar (hidden when printing) -->
+<div class="no-print sticky top-0 z-10 flex items-center justify-between bg-white border-b border-slate-200 px-6 py-3 shadow-sm">
+    <a th:href="@{/bookings/{id}(id=${booking.bookingId})}" class="text-sm text-blue-600 hover:underline">
+        <i class="fas fa-arrow-left mr-1"></i> Back to Booking
+    </a>
+    <div class="flex gap-3">
+        <button onclick="window.print()"
+                class="rounded-xl bg-slate-800 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700">
+            <i class="fas fa-print mr-1"></i> Print / Save PDF
+        </button>
+        <a th:href="@{/payments/booking/{id}(id=${booking.bookingId})}"
+           th:if="${balance > 0}"
+           class="rounded-xl bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700">
+            <i class="fas fa-credit-card mr-1"></i> Pay Now
+        </a>
+    </div>
+</div>
+
+<!-- Invoice document -->
+<div class="mx-auto max-w-3xl px-4 py-8">
+<div class="print-page rounded-2xl bg-white shadow-lg border border-slate-100 overflow-hidden">
+
+    <!-- Header -->
+    <div class="px-10 pt-10 pb-6" style="background: linear-gradient(135deg,#0e4d6c,#1a5c38)">
+        <div class="flex items-start justify-between">
+            <div>
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-hotel text-3xl text-amber-400"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">Heaven Hotel</h1>
+                        <p class="text-xs text-amber-300 uppercase tracking-widest">Jaffna, Northern Sri Lanka</p>
+                    </div>
+                </div>
+                <div class="mt-4 text-xs text-white/60 space-y-0.5">
+                    <p><i class="fas fa-map-marker-alt mr-1"></i> No. 12, KKS Road, Jaffna 40000, Sri Lanka</p>
+                    <p><i class="fas fa-phone mr-1"></i> +94 21 222 5678</p>
+                    <p><i class="fas fa-envelope mr-1"></i> reservations@heavenhotel.lk</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <p class="text-3xl font-bold text-amber-400">INVOICE</p>
+                <p class="mt-1 text-sm text-white/80" th:text="${booking.bookingId}">BKG0001</p>
+                <p class="mt-2 text-xs text-white/50">Issued:</p>
+                <p class="text-sm text-white/80" th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy')}">date</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guest + Status strip -->
+    <div class="flex items-center justify-between bg-slate-50 border-b border-slate-100 px-10 py-4">
+        <div>
+            <p class="text-xs text-slate-400 uppercase tracking-wide">Billed To</p>
+            <p class="font-bold text-slate-900" th:text="${booking.guestId}">Guest</p>
+        </div>
+        <div class="text-center">
+            <p class="text-xs text-slate-400 uppercase tracking-wide">Booking Status</p>
+            <span class="rounded-full px-3 py-1 text-xs font-bold"
+                  th:classappend="${booking.status == 'Confirmed' or booking.status == 'CONFIRMED'} ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'"
+                  th:text="${booking.status}">Status</span>
+        </div>
+        <div class="text-right">
+            <p class="text-xs text-slate-400 uppercase tracking-wide">Payment Status</p>
+            <span class="rounded-full px-3 py-1 text-xs font-bold"
+                  th:classappend="${booking.paymentStatus == 'PAID'} ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'"
+                  th:text="${booking.paymentStatus ?: 'UNPAID'}">UNPAID</span>
+        </div>
+    </div>
+
+    <div class="px-10 py-8">
+
+        <!-- Stay details -->
+        <div class="grid grid-cols-3 gap-4 mb-8">
+            <div class="rounded-xl bg-slate-50 p-4 text-center">
+                <p class="text-xs text-slate-400 uppercase">Check-in</p>
+                <p class="mt-1 font-bold text-slate-900" th:text="${booking.checkInDate}">-</p>
+                <p class="text-xs text-slate-400">From 2:00 PM</p>
+            </div>
+            <div class="rounded-xl bg-slate-50 p-4 text-center">
+                <p class="text-xs text-slate-400 uppercase">Check-out</p>
+                <p class="mt-1 font-bold text-slate-900" th:text="${booking.checkOutDate}">-</p>
+                <p class="text-xs text-slate-400">By 12:00 PM</p>
+            </div>
+            <div class="rounded-xl bg-slate-50 p-4 text-center">
+                <p class="text-xs text-slate-400 uppercase">Duration</p>
+                <p class="mt-1 font-bold text-slate-900" th:text="${booking.numberOfNights} + ' nights'">-</p>
+                <p class="text-xs text-slate-400" th:text="${booking.numberOfGuests} + ' guest(s)'">-</p>
+            </div>
+        </div>
+
+        <!-- Line items -->
+        <table class="w-full text-sm mb-6">
+            <thead>
+                <tr class="border-b-2 border-slate-200">
+                    <th class="text-left py-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Description</th>
+                    <th class="text-center py-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Qty</th>
+                    <th class="text-right py-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Unit Price</th>
+                    <th class="text-right py-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b border-slate-100">
+                    <td class="py-3">
+                        <p class="font-medium text-slate-900"
+                           th:text="${room.tierLabel} + ' Room — ' + ${room.type}">Room</p>
+                        <p class="text-xs text-slate-500"
+                           th:text="'Room ' + ${room.roomNumber} + ' · ' + ${room.description}">-</p>
+                    </td>
+                    <td class="py-3 text-center text-slate-700" th:text="${booking.numberOfNights} + ' nights'">-</td>
+                    <td class="py-3 text-right text-slate-700"
+                        th:text="'Rs. ' + ${#numbers.formatInteger(room.pricePerNight, 1, 'COMMA')}">Rs. 0</td>
+                    <td class="py-3 text-right font-medium text-slate-900"
+                        th:text="'Rs. ' + ${#numbers.formatInteger(booking.subtotal, 1, 'COMMA')}">Rs. 0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Totals -->
+        <div class="flex justify-end">
+            <div class="w-64 space-y-2 text-sm">
+                <div class="flex justify-between text-slate-600">
+                    <span>Subtotal</span>
+                    <span th:text="'Rs. ' + ${#numbers.formatInteger(booking.subtotal, 1, 'COMMA')}">Rs. 0</span>
+                </div>
+                <div class="flex justify-between text-green-600" th:if="${booking.discountAmount > 0}">
+                    <span>Discount</span>
+                    <span th:text="'- Rs. ' + ${#numbers.formatInteger(booking.discountAmount, 1, 'COMMA')}">Rs. 0</span>
+                </div>
+                <div class="flex justify-between text-slate-600">
+                    <span>Tax (10% VAT)</span>
+                    <span th:text="'Rs. ' + ${#numbers.formatInteger(booking.taxAmount, 1, 'COMMA')}">Rs. 0</span>
+                </div>
+                <div class="flex justify-between border-t-2 border-slate-200 pt-2 text-base font-bold text-slate-900">
+                    <span>Total</span>
+                    <span th:text="'Rs. ' + ${#numbers.formatInteger(booking.totalPrice, 1, 'COMMA')}">Rs. 0</span>
+                </div>
+                <div class="flex justify-between text-green-600 font-medium" th:if="${totalPaid > 0}">
+                    <span>Amount Paid</span>
+                    <span th:text="'Rs. ' + ${#numbers.formatInteger(totalPaid, 1, 'COMMA')}">Rs. 0</span>
+                </div>
+                <div class="flex justify-between border-t border-slate-200 pt-2 text-red-600 font-bold" th:if="${balance > 0}">
+                    <span>Balance Due</span>
+                    <span th:text="'Rs. ' + ${#numbers.formatInteger(balance, 1, 'COMMA')}">Rs. 0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment history -->
+        <div class="mt-8" th:if="${payments != null and !#lists.isEmpty(payments)}">
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-3">Payment History</p>
+            <div class="rounded-xl border border-slate-100 overflow-hidden">
+                <table class="w-full text-xs">
+                    <thead class="bg-slate-50">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-slate-400">Transaction ID</th>
+                            <th class="px-4 py-2 text-left text-slate-400">Method</th>
+                            <th class="px-4 py-2 text-left text-slate-400">Date</th>
+                            <th class="px-4 py-2 text-right text-slate-400">Amount</th>
+                            <th class="px-4 py-2 text-center text-slate-400">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="p : ${payments}" class="border-t border-slate-100">
+                            <td class="px-4 py-2 font-mono text-slate-600" th:text="${p.transactionId ?: p.paymentId}">-</td>
+                            <td class="px-4 py-2 text-slate-600" th:text="${p.method ?: '-'}">-</td>
+                            <td class="px-4 py-2 text-slate-600" th:text="${p.paymentDate}">-</td>
+                            <td class="px-4 py-2 text-right font-medium text-slate-900"
+                                th:text="'Rs. ' + ${#numbers.formatInteger(p.amount, 1, 'COMMA')}">Rs. 0</td>
+                            <td class="px-4 py-2 text-center">
+                                <span class="rounded-full px-2 py-0.5 font-semibold"
+                                      th:classappend="${p.status == 'Completed'} ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'"
+                                      th:text="${p.status}">-</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Special requests -->
+        <div class="mt-6 rounded-xl bg-amber-50 border border-amber-100 p-4 text-sm"
+             th:if="${booking.specialRequests != null and booking.specialRequests != 'None' and !booking.specialRequests.isBlank()}">
+            <p class="text-xs font-semibold uppercase tracking-wide text-amber-600 mb-1">Special Requests</p>
+            <p class="text-amber-800" th:text="${booking.specialRequests}">-</p>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="border-t border-slate-100 px-10 py-6 text-center text-xs text-slate-400">
+        <p class="font-medium text-slate-600">Thank you for choosing Heaven Hotel!</p>
+        <p class="mt-1">This is a computer-generated invoice and is valid without signature.</p>
+        <p class="mt-1">For queries: reservations@heavenhotel.lk · +94 21 222 5678</p>
+    </div>
+
+</div>
+</div>
+
+</body>
+</html>

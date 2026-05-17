@@ -62,21 +62,21 @@ public class DataInitializer {
         FileWriterUtil.clearFile(roomsFile);
 
         // BUDGET tier  (< LKR 8,000/night)
-        FileWriterUtil.addRecord(roomsFile, "RM101|101|STANDARD|1|5500.0|AVAILABLE|Cosy single room perfect for solo travellers — steps from Colombo city centre|true|true|false|false|false|" + isoNow + "|||STANDARD|false");
-        FileWriterUtil.addRecord(roomsFile, "RM102|102|STANDARD|2|7000.0|AVAILABLE|Budget twin room with breezy courtyard view — ideal for backpackers|true|true|true|false|false|" + isoNow + "|||STANDARD|true");
+        FileWriterUtil.addRecord(roomsFile, "RM101|101|STANDARD|1|5500.0|AVAILABLE|Cosy single room perfect for solo travellers — steps from Jaffna Clock Tower|true|true|false|false|false|" + isoNow + "|||STANDARD|false");
+        FileWriterUtil.addRecord(roomsFile, "RM102|102|STANDARD|2|7000.0|AVAILABLE|Budget twin room with breezy courtyard view — near Jaffna Market|true|true|true|false|false|" + isoNow + "|||STANDARD|true");
 
         // STANDARD tier  (LKR 8,000–19,999/night)
-        FileWriterUtil.addRecord(roomsFile, "RM201|201|STANDARD|2|10000.0|AVAILABLE|Comfortable Colombo city-view room with warm Ceylon decor|true|true|true|false|false|" + isoNow + "|||STANDARD|true");
-        FileWriterUtil.addRecord(roomsFile, "RM202|202|STANDARD|2|14500.0|AVAILABLE|Deluxe garden-view room overlooking tropical palms and hotel pool|true|true|true|false|true|" + isoNow + "|||STANDARD|true");
-        FileWriterUtil.addRecord(roomsFile, "RM203|203|STANDARD|3|18000.0|AVAILABLE|Spacious family room with extra bed — near Galle Face Green|true|true|true|false|false|" + isoNow + "|||STANDARD|true");
+        FileWriterUtil.addRecord(roomsFile, "RM201|201|STANDARD|2|10000.0|AVAILABLE|Comfortable lagoon-view room with warm Tamil heritage decor|true|true|true|false|false|" + isoNow + "|||STANDARD|true");
+        FileWriterUtil.addRecord(roomsFile, "RM202|202|STANDARD|2|14500.0|AVAILABLE|Deluxe garden-view room overlooking palmyra palms and hotel pool|true|true|true|false|true|" + isoNow + "|||STANDARD|true");
+        FileWriterUtil.addRecord(roomsFile, "RM203|203|STANDARD|3|18000.0|AVAILABLE|Spacious family room with extra bed — near Nallur Kovil|true|true|true|false|false|" + isoNow + "|||STANDARD|true");
 
         // LUXURY tier  (LKR 20,000–49,999/night)
-        FileWriterUtil.addRecord(roomsFile, "RM301|301|SUITE|4|28000.0|AVAILABLE|Junior suite with separate lounge and sweeping Indian Ocean view|true|true|true|true|true|" + isoNow + "|||SUITE|2|2|false|true|1.5");
-        FileWriterUtil.addRecord(roomsFile, "RM302|302|SUITE|4|40000.0|AVAILABLE|Luxury suite with private Jacuzzi and panoramic Colombo skyline view|true|true|true|true|true|" + isoNow + "|||SUITE|2|2|true|true|1.5");
+        FileWriterUtil.addRecord(roomsFile, "RM301|301|SUITE|4|28000.0|AVAILABLE|Junior suite with separate lounge and sweeping Jaffna Lagoon view|true|true|true|true|true|" + isoNow + "|||SUITE|2|2|false|true|1.5");
+        FileWriterUtil.addRecord(roomsFile, "RM302|302|SUITE|4|40000.0|AVAILABLE|Luxury suite with private Jacuzzi and panoramic view of Jaffna Fort|true|true|true|true|true|" + isoNow + "|||SUITE|2|2|true|true|1.5");
 
         // PRESIDENTIAL tier  (LKR 50,000+/night)
-        FileWriterUtil.addRecord(roomsFile, "RM401|401|SUITE|6|65000.0|AVAILABLE|Presidential suite — 3 bedrooms, private pool deck overlooking the ocean|true|true|true|true|true|" + isoNow + "|||SUITE|3|3|true|true|1.8");
-        FileWriterUtil.addRecord(roomsFile, "RM402|402|SUITE|6|95000.0|AVAILABLE|Royal Ceylon Penthouse — rooftop terrace, butler service and heritage decor|true|true|true|true|true|" + isoNow + "|||SUITE|3|3|true|true|2.0");
+        FileWriterUtil.addRecord(roomsFile, "RM401|401|SUITE|6|65000.0|AVAILABLE|Presidential suite — 3 bedrooms, private pool deck overlooking the Jaffna Lagoon|true|true|true|true|true|" + isoNow + "|||SUITE|3|3|true|true|1.8");
+        FileWriterUtil.addRecord(roomsFile, "RM402|402|SUITE|6|95000.0|AVAILABLE|Royal Jaffna Penthouse — rooftop terrace, butler service and Tamil heritage decor|true|true|true|true|true|" + isoNow + "|||SUITE|3|3|true|true|2.0");
 
         log.info("Demo rooms initialized with LKR pricing: 2 budget, 3 standard, 2 luxury, 2 presidential");
     }

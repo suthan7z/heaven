@@ -17,7 +17,7 @@
                     <span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">Available</span>
                 </div>
                 <p class="mt-1 text-sm text-slate-500" th:text="${room.roomType}">STANDARD</p>
-                <p class="mt-3 text-2xl font-bold text-slate-900" th:text="'$' + ${#numbers.formatDecimal(room.pricePerNight, 1, 2)} + '/night'">$0/night</p>
+                <p class="mt-3 text-2xl font-bold text-slate-900" th:text="'Rs. ' + ${#numbers.formatInteger(room.pricePerNight, 1, 'COMMA')} + '/night'">$0/night</p>
                 <a th:href="@{/bookings}" class="mt-4 block rounded-xl bg-blue-600 py-2 text-center text-sm font-medium text-white hover:bg-blue-700">Book Now</a>
             </div>
         </div>

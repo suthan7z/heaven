@@ -25,8 +25,8 @@ public class HotelConfig {
     public HotelConfig() {
         // Defaults
         this.hotelName          = "Heaven Hotel";
-        this.address            = "No. 47, Galle Face Court, Colombo 03, Sri Lanka";
-        this.phone              = "+94 11 234 5678";
+        this.address            = "No. 12, KKS Road, Jaffna 40000, Sri Lanka";
+        this.phone              = "+94 21 222 5678";
         this.email              = "reservations@heavenhotel.lk";
         this.checkInTime        = "14:00";
         this.checkOutTime       = "12:00";

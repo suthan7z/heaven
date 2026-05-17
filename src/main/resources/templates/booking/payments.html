@@ -11,7 +11,7 @@
                 <tr th:each="p : ${payments}" class="hover:bg-slate-50">
                     <td class="px-6 py-4 font-mono text-xs" th:text="${p.paymentId}">-</td>
                     <td class="px-6 py-4" th:text="${p.bookingId}">-</td>
-                    <td class="px-6 py-4 font-semibold" th:text="'$' + ${#numbers.formatDecimal(p.amount, 1, 2)}">$0</td>
+                    <td class="px-6 py-4 font-semibold" th:text="'Rs. ' + ${#numbers.formatInteger(p.amount, 1, 'COMMA')}">$0</td>
                     <td class="px-6 py-4"><span class="rounded-full bg-green-100 px-2 py-1 text-xs text-green-700" th:text="${p.status}">-</span></td>
                 </tr>
             </tbody></table>

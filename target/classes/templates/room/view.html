@@ -20,7 +20,7 @@
             <p class="mt-1 text-slate-500" th:text="${room.roomType}">STANDARD</p>
             <p class="mt-4 text-slate-700" th:text="${room.description}">Description</p>
             <div class="mt-6 grid gap-4 sm:grid-cols-3">
-                <div class="rounded-xl bg-slate-50 p-4"><p class="text-sm text-slate-500">Price / Night</p><p class="text-xl font-bold text-slate-900" th:text="'$' + ${#numbers.formatDecimal(room.pricePerNight, 1, 2)}">$0</p></div>
+                <div class="rounded-xl bg-slate-50 p-4"><p class="text-sm text-slate-500">Price / Night</p><p class="text-xl font-bold text-slate-900" th:text="'Rs. ' + ${#numbers.formatInteger(room.pricePerNight, 1, 'COMMA')}">$0</p></div>
                 <div class="rounded-xl bg-slate-50 p-4"><p class="text-sm text-slate-500">Capacity</p><p class="text-xl font-bold text-slate-900" th:text="${room.capacity} + ' guests'">2 guests</p></div>
                 <div class="rounded-xl bg-slate-50 p-4"><p class="text-sm text-slate-500">Amenities</p><p class="text-sm text-slate-700" th:text="${room.amenities}">-</p></div>
             </div>

@@ -3,143 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Heaven Hotel</title>
-    
+    <title>Sign In - Heaven Hotel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/static/css/style.css}">
-    <link rel="stylesheet" th:href="@{/static/css/auth.css}">
+    <style>
+        .hero-panel {
+            background: linear-gradient(160deg, #0e4d6c 0%, #1a5c38 55%, #c9a227 100%);
+        }
+        .glass-card {
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .input-field {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            transition: border-color .2s, background .2s;
+        }
+        .input-field::placeholder { color: rgba(255,255,255,0.4); }
+        .input-field:focus {
+            outline: none;
+            background: rgba(255,255,255,0.12);
+            border-color: #c9a227;
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #c9a227, #e8b830);
+            transition: transform .15s, box-shadow .15s;
+        }
+        .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(201,162,39,.4); }
+        .btn-gold:active { transform: translateY(0); }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .float { animation: float 4s ease-in-out infinite; }
+    </style>
 </head>
-<body>
-    <div class="auth-container">
-        <div class="auth-form-wrapper auth-form-narrow">
-            <h2>
-                <i class="fas fa-sign-in-alt"></i> Welcome Back
-            </h2>
-            <p class="form-subtitle">Login to your Heaven Hotel account</p>
-            
-            <!-- Error Messages -->
-            <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-                <i class="fas fa-exclamation-circle"></i> <span th:text="${errorMessage}"></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">×</button>
+<body class="min-h-screen hero-panel flex items-center justify-center p-4">
+
+<!-- Decorative blobs -->
+<div class="pointer-events-none fixed inset-0 overflow-hidden">
+    <div class="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-amber-500/10 blur-3xl"></div>
+    <div class="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-teal-500/10 blur-3xl"></div>
+</div>
+
+<div class="relative z-10 w-full max-w-4xl">
+    <div class="grid overflow-hidden rounded-3xl shadow-2xl lg:grid-cols-2">
+
+        <!-- ── Left panel – branding ── -->
+        <div class="hidden lg:flex flex-col justify-between p-10 text-white"
+             style="background: rgba(0,0,0,0.25); backdrop-filter: blur(8px); border-right: 1px solid rgba(255,255,255,0.1)">
+            <div>
+                <a th:href="@{/}" class="inline-flex items-center gap-3">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-400/20 text-amber-300">
+                        <i class="fas fa-hotel text-xl"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-wide">Heaven Hotel</span>
+                </a>
+                <p class="mt-1 text-xs tracking-widest text-amber-300/70 uppercase">Jaffna, Northern Sri Lanka</p>
             </div>
-            
-            <!-- Success Messages -->
-            <div th:if="${successMessage}" class="alert alert-success" role="alert">
-                <i class="fas fa-check-circle"></i> <span th:text="${successMessage}"></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">×</button>
-            </div>
-            
-            <!-- Login Form -->
-            <form method="post" th:action="@{/auth/login}" class="needs-validation" novalidate>
-                <div class="form-group">
-                    <label for="username" class="form-label">Username or Email</label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        name="username" 
-                        class="form-control" 
-                        placeholder="Enter your username or email"
-                        required
-                        autofocus>
-                    <div class="invalid-feedback">
-                        Please provide a valid username or email.
+
+            <!-- Feature highlights -->
+            <div class="space-y-5">
+                <div class="float flex items-start gap-4">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-400/20 text-amber-300">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold">Presidential Suites</p>
+                        <p class="text-sm text-white/60">Private pool decks overlooking the Indian Ocean</p>
                     </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="password" class="form-label">Password</label>
-                    <div class="password-toggle">
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            class="form-control" 
-                            placeholder="Enter your password"
-                            required>
-                        <button 
-                            type="button" 
-                            class="toggle-btn" 
-                            title="Toggle password visibility"
-                            aria-label="Toggle password visibility"
-                            onclick="togglePasswordVisibility('password')">
-                            <i class="fas fa-eye"></i>
+                <div class="float flex items-start gap-4" style="animation-delay:.8s">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-400/20 text-amber-300">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold">Ceylon Tea Experience</p>
+                        <p class="text-sm text-white/60">Highland tea delivered to your room each morning</p>
+                    </div>
+                </div>
+                <div class="float flex items-start gap-4" style="animation-delay:1.6s">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-400/20 text-amber-300">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold">4.9 ★ Guest Rating</p>
+                        <p class="text-sm text-white/60">Trusted by over 10,000 guests worldwide</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-xs text-white/30">© 2025 Heaven Hotel (Pvt) Ltd · All rights reserved</p>
+        </div>
+
+        <!-- ── Right panel – form ── -->
+        <div class="glass-card p-8 sm:p-10 text-white">
+
+            <!-- Mobile logo -->
+            <a th:href="@{/}" class="mb-6 flex items-center gap-2 lg:hidden">
+                <i class="fas fa-hotel text-amber-400 text-xl"></i>
+                <span class="font-bold text-lg">Heaven Hotel</span>
+            </a>
+
+            <h1 class="text-2xl font-bold">Welcome back</h1>
+            <p class="mt-1 text-sm text-white/60">Sign in to manage your bookings</p>
+
+            <!-- Alerts -->
+            <div th:if="${errorMessage}"
+                 class="mt-5 flex items-center gap-3 rounded-xl bg-red-500/20 border border-red-400/30 px-4 py-3 text-sm text-red-200">
+                <i class="fas fa-exclamation-circle shrink-0"></i>
+                <span th:text="${errorMessage}"></span>
+            </div>
+            <div th:if="${successMessage}"
+                 class="mt-5 flex items-center gap-3 rounded-xl bg-green-500/20 border border-green-400/30 px-4 py-3 text-sm text-green-200">
+                <i class="fas fa-check-circle shrink-0"></i>
+                <span th:text="${successMessage}"></span>
+            </div>
+
+            <!-- Form -->
+            <form method="post" th:action="@{/auth/login}" class="mt-7 space-y-5">
+
+                <div>
+                    <label class="mb-1.5 block text-sm font-medium text-white/80">Username or Email</label>
+                    <div class="relative">
+                        <i class="fas fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i>
+                        <input type="text" name="username" placeholder="Enter username or email"
+                               required autofocus
+                               class="input-field w-full rounded-xl py-3 pl-10 pr-4 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mb-1.5 flex items-center justify-between">
+                        <label class="text-sm font-medium text-white/80">Password</label>
+                        <a th:href="@{/forgot-password}" class="text-xs text-amber-300 hover:text-amber-200 transition">
+                            Forgot password?
+                        </a>
+                    </div>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-white/30 text-sm"></i>
+                        <input type="password" id="pwd" name="password" placeholder="Enter your password"
+                               required
+                               class="input-field w-full rounded-xl py-3 pl-10 pr-11 text-sm">
+                        <button type="button" onclick="togglePwd()"
+                                class="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/70 transition">
+                            <i id="pwdIcon" class="fas fa-eye text-sm"></i>
                         </button>
                     </div>
-                    <div class="invalid-feedback">
-                        Please provide your password.
-                    </div>
                 </div>
-                
-                <div class="form-remember-me">
-                    <input 
-                        type="checkbox" 
-                        id="rememberMe" 
-                        name="remember-me">
-                    <label for="rememberMe">
-                        Remember me
-                    </label>
-                </div>
-                
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-sign-in-alt"></i> Login
+
+                <label class="flex cursor-pointer items-center gap-2.5 text-sm text-white/70 select-none">
+                    <input type="checkbox" name="remember-me"
+                           class="h-4 w-4 rounded border-white/30 bg-white/10 accent-amber-400">
+                    Keep me signed in
+                </label>
+
+                <button type="submit"
+                        class="btn-gold w-full rounded-xl py-3 text-sm font-bold text-slate-900 shadow-lg">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Sign In
                 </button>
             </form>
-            
-            <!-- Links -->
-            <div class="forgot-password-link">
-                <a href="/forgot-password">
-                    <i class="fas fa-key"></i> Forgot Password?
-                </a>
+
+            <div class="divider mt-7 flex items-center gap-3 text-xs text-white/30">
+                <span class="px-2">New to Heaven Hotel?</span>
             </div>
-            
-            <div class="auth-divider">
-                <span>Don't have an account?</span>
-            </div>
-            
-            <div class="auth-footer">
-                <a th:href="@{/register}" class="btn btn-outline-primary w-full justify-center">
-                    <i class="fas fa-user-plus"></i> Create Account
-                </a>
-            </div>
-            
-            <div class="auth-footer auth-footer-centered">
-                <small class="text-muted">
-                    Having issues? <a href="/contact">Contact Support</a>
-                </small>
-            </div>
+
+            <a th:href="@{/register}"
+               class="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 py-2.5 text-sm font-medium text-white/80 transition hover:bg-white/10">
+                <i class="fas fa-user-plus text-amber-300"></i> Create an Account
+            </a>
+
+            <p class="mt-5 text-center text-xs text-white/30">
+                Need help? <a th:href="@{/contact}" class="text-amber-300 hover:underline">Contact Support</a>
+            </p>
         </div>
     </div>
-    
-    <script th:src="@{/static/js/app.js}"></script>
-    <script>
-        function togglePasswordVisibility(event, inputId) {
-            const input = document.getElementById(inputId);
-            const button = event.target.closest('.toggle-btn');
-            
-            if (!input || !button) {
-                return;
-            }
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                button.innerHTML = '<i class="fas fa-eye-slash"></i>';
-            } else {
-                input.type = 'password';
-                button.innerHTML = '<i class="fas fa-eye"></i>';
-            }
-        }
-        
-        // Initialize form validation
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('.needs-validation');
-            form.addEventListener('submit', function(event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
-    </script>
+</div>
+
+<script>
+function togglePwd() {
+    const input = document.getElementById('pwd');
+    const icon  = document.getElementById('pwdIcon');
+    const isText = input.type === 'text';
+    input.type = isText ? 'password' : 'text';
+    icon.className = isText ? 'fas fa-eye text-sm' : 'fas fa-eye-slash text-sm';
+}
+</script>
 </body>
 </html>

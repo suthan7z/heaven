@@ -14,7 +14,10 @@
       "Bash(\"/c/Users/Mr.Cherry/AppData/Local/Temp/chocolatey/ChocolateyScratch/maven/3.9.15/apache-maven-3.9.15/bin/mvn\" compile *)",
       "Bash(MAVEN_OPTS=\"-Xmx256m -Xms128m\" \"/c/Users/Mr.Cherry/AppData/Local/Temp/chocolatey/ChocolateyScratch/maven/3.9.15/apache-maven-3.9.15/bin/mvn\" compile)",
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Mr.Cherry\\\\Downloads\\\\Heaven\\\\src\\\\main\\\\java\\\\com\\\\heaven\\\\hotel\" -Recurse -Filter \"*.java\")",
-      "Bash(Select-Object FullName)"
+      "Bash(Select-Object FullName)",
+      "PowerShell(netstat -ano)",
+      "Bash(netstat -ano)",
+      "Bash(MAVEN_OPTS=\"-Xmx256m\" \"/c/Users/Mr.Cherry/AppData/Local/Temp/chocolatey/ChocolateyScratch/maven/3.9.15/apache-maven-3.9.15/bin/mvn\" compile)"
     ]
   }
 }

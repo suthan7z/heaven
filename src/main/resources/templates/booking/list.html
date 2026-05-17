@@ -29,14 +29,21 @@
                         <td class="px-6 py-4" th:text="${b.checkInDate}">-</td>
                         <td class="px-6 py-4" th:text="${b.checkOutDate}">-</td>
                         <td class="px-6 py-4" th:text="${b.numberOfGuests}">0</td>
-                        <td class="px-6 py-4 font-semibold" th:text="'$' + ${#numbers.formatDecimal(b.totalPrice, 1, 2)}">$0</td>
+                        <td class="px-6 py-4 font-semibold" th:text="'Rs. ' + ${#numbers.formatInteger(b.totalPrice, 1, 'COMMA')}">$0</td>
                         <td class="px-6 py-4">
                             <span class="rounded-full px-2 py-1 text-xs font-medium"
                                   th:classappend="${b.status == 'CONFIRMED'} ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'"
                                   th:text="${b.status}">PENDING</span>
                         </td>
                         <td class="px-6 py-4">
-                            <a th:href="@{/bookings/{id}(id=${b.bookingId})}" class="text-blue-600 hover:underline">View</a>
+                            <div class="flex items-center gap-3">
+                            <a th:href="@{/bookings/{id}(id=${b.bookingId})}" class="text-blue-600 hover:underline text-sm">View</a>
+                            <a th:if="${b.paymentStatus != 'PAID' and b.status != 'CANCELLED'}"
+                               th:href="@{/payments/booking/{id}(id=${b.bookingId})}"
+                               class="rounded-lg bg-green-100 px-2 py-1 text-xs font-semibold text-green-700 hover:bg-green-200">Pay</a>
+                            <a th:href="@{/invoices/booking/{id}(id=${b.bookingId})}"
+                               class="rounded-lg bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-700 hover:bg-blue-200">Invoice</a>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
