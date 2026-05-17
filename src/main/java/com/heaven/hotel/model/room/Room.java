@@ -163,8 +163,37 @@ public abstract class Room {
     
     // Abstract methods for subclasses
     public abstract String getAmenities();
-    
+
     public abstract double getCalculatedPrice();
+
+    // Tier derived from price per night (LKR)
+    public String getTier() {
+        double price = getCalculatedPrice();
+        if (price < 8000)   return "BUDGET";
+        if (price < 20000)  return "STANDARD";
+        if (price < 50000)  return "LUXURY";
+        return "PRESIDENTIAL";
+    }
+
+    public String getTierLabel() {
+        switch (getTier()) {
+            case "BUDGET":       return "Budget";
+            case "STANDARD":     return "Standard";
+            case "LUXURY":       return "Luxury";
+            case "PRESIDENTIAL": return "Presidential";
+            default:             return "Standard";
+        }
+    }
+
+    public String getTierColor() {
+        switch (getTier()) {
+            case "BUDGET":       return "green";
+            case "STANDARD":     return "blue";
+            case "LUXURY":       return "purple";
+            case "PRESIDENTIAL": return "amber";
+            default:             return "blue";
+        }
+    }
     
     // Check room status
     public boolean isAvailable() {

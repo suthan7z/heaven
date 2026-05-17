@@ -29,23 +29,35 @@ public class RoomController {
     @GetMapping
     public String listRooms(
             @RequestParam(required = false) String filter,
+            @RequestParam(required = false) String tier,
             Model model) {
-        
-        List<Room> rooms;
-        if (filter != null && !filter.isEmpty()) {
-            rooms = roomService.searchRooms(filter);
-            model.addAttribute("filter", filter);
-        } else {
-            rooms = roomService.getAllRooms();
+
+        List<Room> rooms = roomService.getAllRooms();
+
+        if (tier != null && !tier.isEmpty()) {
+            rooms = rooms.stream()
+                    .filter(r -> tier.equalsIgnoreCase(r.getTier()))
+                    .toList();
+            model.addAttribute("activeTier", tier.toUpperCase());
         }
-        
+
+        if (filter != null && !filter.isEmpty()) {
+            String lf = filter.toLowerCase();
+            rooms = rooms.stream()
+                    .filter(r -> String.valueOf(r.getRoomNumber()).contains(lf)
+                            || r.getRoomType().toLowerCase().contains(lf)
+                            || (r.getDescription() != null && r.getDescription().toLowerCase().contains(lf)))
+                    .toList();
+            model.addAttribute("filter", filter);
+        }
+
         model.addAttribute("rooms", rooms);
         model.addAttribute("totalRooms", roomService.getTotalRoomCount());
         model.addAttribute("occupiedRooms", roomService.getOccupiedRoomCount());
         model.addAttribute("availableRooms", roomService.getAvailableRoomCount());
         model.addAttribute("occupancyRate", String.format("%.1f%%", roomService.getOccupancyRate()));
         model.addAttribute("pageTitle", "Room Management");
-        
+
         return "room/list";
     }
     

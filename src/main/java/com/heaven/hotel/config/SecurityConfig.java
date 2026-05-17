@@ -46,7 +46,8 @@ public class SecurityConfig {
                 .requestMatchers("/auth/**", "/login", "/register", "/forgot-password").permitAll()
                 .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
-                
+                .requestMatchers("/rooms", "/rooms/available/list").permitAll()
+
                 // Admin endpoints
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 

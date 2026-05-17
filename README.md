@@ -341,3 +341,39 @@ For questions or issues:
 run local
 
 'C:\apache-maven-3.9.6\bin\mvn.cmd' spring-boot:run
+
+
+..............................
+
+
+
+
+
+Fix the VS Code errors first:
+
+Press Ctrl+Shift+P → type "Java: Clean Java Language Server Workspace" → click Restart and Delete. This forces VS Code to re-read the pom.xml and re-index everything.
+
+How to actually run the project — pick one:
+
+Option A — Terminal (most reliable)
+
+Open a terminal in VS Code (Ctrl+`` ) and run:
+
+
+cd c:\Users\Mr.Cherry\Downloads\Heaven
+Then:
+
+
+"C:\Users\Mr.Cherry\AppData\Local\Temp\chocolatey\ChocolateyScratch\maven\3.9.15\apache-maven-3.9.15\bin\mvn.cmd" spring-boot:run -Dspring-boot.run.jvmArguments="-Xmx256m"
+Wait until you see Started HotelReservationApplication, then open http://localhost:8080/heaven
+
+Option B — VS Code Spring Boot Dashboard
+
+Install the Spring Boot Extension Pack from the Extensions panel (Ctrl+Shift+X), search Spring Boot Extension Pack by VMware
+After install, a Spring Boot Dashboard icon appears in the left sidebar (looks like a leaf 🍃)
+Click it → your app appears → press the ▶ Run button
+Option C — Run directly from the main class
+
+Open HotelReservationApplication.java
+Click the Run button that appears above the main method (VS Code shows a small ▶ code lens above public static void main)
+Once started, go to: http://localhost:8080/heaven
